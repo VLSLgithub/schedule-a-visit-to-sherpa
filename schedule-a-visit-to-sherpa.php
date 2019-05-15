@@ -25,16 +25,23 @@ if ( ! class_exists( 'Schedule_a_Visit_to_Sherpa_Plugin' ) ) {
 	class Schedule_a_Visit_to_Sherpa_Plugin {
 		
 		/**
-		 * @var			Schedule_a_Visit_to_Sherpa_Plugin $plugin_data Holds Plugin Header Info
+		 * @var			array $plugin_data Holds Plugin Header Info
 		 * @since		1.0.0
 		 */
 		public $plugin_data;
 		
 		/**
-		 * @var			Schedule_a_Visit_to_Sherpa_Plugin $admin_errors Stores all our Admin Errors to fire at once
+		 * @var			array $admin_errors Stores all our Admin Errors to fire at once
 		 * @since		1.0.0
 		 */
 		private $admin_errors;
+
+		/**
+		 * @var         Schedule_a_Visit_to_Sherpa_API API Class
+		 *
+		 * @since		1.0.0
+		 */
+		public $api;
 
 		/**
 		 * Get active instance
@@ -175,6 +182,14 @@ if ( ! class_exists( 'Schedule_a_Visit_to_Sherpa_Plugin' ) ) {
 		 * @return	  void
 		 */
 		private function require_necessities() {
+
+			$this->api = false;
+
+			require_once Schedule_a_Visit_to_Sherpa_Plugin_DIR . 'core/api/class-schedule-a-visit-to-sherpa-api.php';
+
+			if ( $api_key = get_option( 'vibrant_life_sherpa_api_key' ) ) {
+				$this->api = new Schedule_a_Visit_to_Sherpa_API( $api_key );
+			}
 			
 			require_once Schedule_a_Visit_to_Sherpa_Plugin_DIR . 'core/admin/class-schedule-a-visit-to-sherpa-admin.php';
 			
