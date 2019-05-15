@@ -192,6 +192,8 @@ if ( ! class_exists( 'Schedule_a_Visit_to_Sherpa_Plugin' ) ) {
 			}
 			
 			require_once Schedule_a_Visit_to_Sherpa_Plugin_DIR . 'core/admin/class-schedule-a-visit-to-sherpa-admin.php';
+
+			require_once Schedule_a_Visit_to_Sherpa_Plugin_DIR . 'core/front/class-schedule-a-visit-to-sherpa-send.php';
 			
 		}
 		
