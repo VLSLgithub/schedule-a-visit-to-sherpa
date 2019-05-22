@@ -32,8 +32,8 @@ if ( ! class_exists( 'Schedule_a_Visit_to_Sherpa_API' ) ) {
 		function __construct( $api_key ) {
 
 			$this->set_headers( array( 
-				'Content-Type' => 'application/json',
-				'Authorization' => 'Bearer ' . trim( $api_key ), // API Key gets passed in as a POST Param
+				'Content-Type: application/json',
+				'Authorization: Bearer ' . trim( $api_key ), // API Key gets passed in as a POST Param
 			) );
 
         }
@@ -41,7 +41,7 @@ if ( ! class_exists( 'Schedule_a_Visit_to_Sherpa_API' ) ) {
         public function test() {
 
             $test = $this->post(
-                '',
+                'companies/250/communities/1/leads',
                 array(),
                 10
             );
