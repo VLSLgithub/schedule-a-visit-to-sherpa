@@ -39,7 +39,59 @@ class Schedule_a_Visit_to_Sherpa_Send {
         $sherpa_mapping = get_option( 'vibrant_life_sherpa_mapping' );
         
 		// Bail on Forms that are not sending to Sherpa
-        if ( (int) $form['id'] !== get_schedule_a_visit_to_sherpa_form() ) return false;
+		if ( (int) $form['id'] !== get_schedule_a_visit_to_sherpa_form() ) return false;
+
+		$location_id = false;
+		$email = false;
+		$first_name = false;
+		$last_name = false;
+
+		foreach ( $form['fields'] as $field ) {
+
+			if ( $field->label == 'Which Vibrant Life Community Are You Wanting to Visit?' ) {
+
+				$location_id = ( isset( $entry[ $field->id ] ) && $entry[ $field->id ] ) ? $entry[ $field->id ] : false;
+
+			}
+
+			if ( $field->label == 'Email' ) {
+
+				$email = ( isset( $entry[ $field->id ] ) && $entry[ $field->id ] ) ? $entry[ $field->id ] : false;
+
+			}
+
+			if ( $field->label == 'Name' ) {
+
+				foreach ( $field->inputs as $input ) {
+
+					if ( $input['label'] == 'First' ) {
+
+						$first_name = ( isset( $entry[ $input['id'] ] ) && $entry[ $input['id'] ] ) ? $entry[ $input['id'] ] : false;
+
+					}
+
+					if ( $input['label'] == 'Last' ) {
+
+						$last_name = ( isset( $entry[ $input['id'] ] ) && $entry[ $input['id'] ] ) ? $entry[ $input['id'] ] : false;
+
+					}
+
+				}
+
+			}
+
+		}
+
+		$result = SCHEDULEAVISITTOSHERPA()->api->create_lead( 250, 1, array(
+			'vendorName' => get_bloginfo( 'name' ),
+			'sourceCategory' => get_site_url(),
+			'sourceName' => ( is_front_page() ) ? __( 'Home Page', 'schedule-a-visit-to-sherpa' ) : get_the_title(),
+			'residentContactFirstName' => $first_name,
+			'residentContactLastName' => $last_name,
+			'primaryContactFirstName' => $first_name,
+			'primaryContactLastName' => $last_name,
+			'primaryContactEmail' => $email,
+		) );
         
     }
 

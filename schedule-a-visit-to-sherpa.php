@@ -189,8 +189,6 @@ if ( ! class_exists( 'Schedule_a_Visit_to_Sherpa_Plugin' ) ) {
 
 			if ( $api_key = get_option( 'vibrant_life_sherpa_api_key' ) ) {
 				$this->api = new Schedule_a_Visit_to_Sherpa_API( $api_key );
-				var_dump( $this->api->test() );
-				die();
 			}
 			
 			require_once Schedule_a_Visit_to_Sherpa_Plugin_DIR . 'core/admin/class-schedule-a-visit-to-sherpa-admin.php';
