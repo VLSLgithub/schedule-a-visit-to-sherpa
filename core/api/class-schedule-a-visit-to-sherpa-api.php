@@ -41,18 +41,18 @@ if ( ! class_exists( 'Schedule_a_Visit_to_Sherpa_API' ) ) {
 		/**
 		 * https://documenter.getpostman.com/view/6050361/S11RLvu1?version=latest
 		 *
-		 * @param   int    $company_id    [$company_id description]
-		 * @param   int    $community_id  [$community_id description]
-		 * @param   array  $args          [$args description]
-		 * @param   int    $timeout       [$timeout description]
+		 * @param   int    $company_id    Company ID
+		 * @param   int    $community_id  Community ID
+		 * @param   array  $args          Arguments to create the Lead
+		 * @param   int    $timeout       Connection Timeout
 		 *
-		 * @return  [type]                [return description]
+		 * @return  object                Error messages have an "errors" property
 		 */
 		public function create_lead( $company_id, $community_id, array $args, int $timeout = 10 ) {
 
 			// Ensures all Required Data is at least initialized
 			$args = wp_parse_args( $args, array(
-				'vendorName' => '',
+				'vendorName' => 'Company Website', // This value must be "Company Website"
 				'sourceCategory' => '',
 				'sourceName' => '',
 				'residentContactFirstName' => '',
@@ -68,8 +68,7 @@ if ( ! class_exists( 'Schedule_a_Visit_to_Sherpa_API' ) ) {
 				$timeout
 			);
 
-			var_dump( $response );
-			die();
+			return $response;
 
 		}
 
