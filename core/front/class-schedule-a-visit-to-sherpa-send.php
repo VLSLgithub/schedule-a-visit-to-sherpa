@@ -83,8 +83,6 @@ class Schedule_a_Visit_to_Sherpa_Send {
 		}
 
 		$result = SCHEDULEAVISITTOSHERPA()->api->create_lead( 250, 1, array(
-			'sourceCategory' => get_site_url(),
-			'sourceName' => ( is_front_page() ) ? __( 'Home Page', 'schedule-a-visit-to-sherpa' ) : get_the_title(),
 			'residentContactFirstName' => $first_name,
 			'residentContactLastName' => $last_name,
 			'primaryContactFirstName' => $first_name,

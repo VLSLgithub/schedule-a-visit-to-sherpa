@@ -52,13 +52,13 @@ if ( ! class_exists( 'Schedule_a_Visit_to_Sherpa_API' ) ) {
 
 			// Ensures all Required Data is at least initialized
 			$args = wp_parse_args( $args, array(
-				'vendorName' => 'Company Website', // This value must be "Company Website"
-				'sourceCategory' => '',
-				'sourceName' => '',
 				'residentContactFirstName' => '',
 				'residentContactLastName' => '',
 				'primaryContactFirstName' => '',
 				'primaryContactLastName' => '',
+				'vendorName' => 'Company Website', // This value must be "Company Website"
+				'sourceCategory' => 'Internet', // This needs a predefined value too
+				'sourceName' => get_site_url(), // This should be allowed to be more dynamic, potentially
 				'referralDateTime' => current_time( 'Y-m-d\TH:i:sP', 1 ), // If it is "Zulu Time", or UTC, the Timezone offset is always +0:00 so I don't know why including the offset is especially necessary
 			) );
 
