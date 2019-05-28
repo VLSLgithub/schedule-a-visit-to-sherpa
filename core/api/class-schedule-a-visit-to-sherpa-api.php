@@ -22,7 +22,7 @@ if ( ! class_exists( 'Schedule_a_Visit_to_Sherpa_API' ) ) {
 		 * @var			string $api_endpoint Holds set API Endpoint
 		 * @since		{{VERSION}}
 		 */
-		public $api_endpoint = 'https://sandbox.sherpacrm.com/v1';
+		public $api_endpoint = 'https://members.sherpacrm.com/v1';
 
 		/**
 		 * Schedule_a_Visit_to_Sherpa_API constructor.
