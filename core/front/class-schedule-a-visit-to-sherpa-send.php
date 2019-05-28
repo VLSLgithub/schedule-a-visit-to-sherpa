@@ -36,21 +36,44 @@ class Schedule_a_Visit_to_Sherpa_Send {
 	public function send_to_sherpa( $entry, $form ) {
 		
 		// Grabbing saved Mappings from the DB
-        $sherpa_mapping = get_option( 'vibrant_life_sherpa_mapping' );
+		$sherpa_mapping = get_option( 'vibrant_life_sherpa_mapping' );
+		
+		// Bail if mapping not configured
+		if ( ! $sherpa_mapping ) return false;
         
 		// Bail on Forms that are not sending to Sherpa
 		if ( (int) $form['id'] !== get_schedule_a_visit_to_sherpa_form() ) return false;
 
 		$location_id = false;
 		$email = false;
-		$first_name = false;
-		$last_name = false;
+		$your_first_name = false;
+		$your_last_name = false;
+		$resident_first_name = false;
+		$resident_last_name = false;
 
 		foreach ( $form['fields'] as $field ) {
 
 			if ( $field->label == 'Which Vibrant Life Community Are You Wanting to Visit?' ) {
 
-				$location_id = ( isset( $entry[ $field->id ] ) && $entry[ $field->id ] ) ? $entry[ $field->id ] : false;
+				$location_short_name = ( isset( $entry[ $field->id ] ) && $entry[ $field->id ] ) ? $entry[ $field->id ] : false;
+
+				$location = new WP_Query( array(
+					'post_type' => 'facility',
+					'posts_per_page' => 1,
+					'fields' => 'ids',
+					'meta_query' => array(
+						'relationship' => 'AND',
+						array(
+							'key' => 'rbm_cpts_short_name',
+							'value' => $location_short_name,
+							'compare' => '=',
+						),
+					),
+				) );
+
+				if ( ! $location->have_posts() ) continue;
+	
+				$location_id = $location->posts[0];
 
 			}
 
@@ -60,19 +83,39 @@ class Schedule_a_Visit_to_Sherpa_Send {
 
 			}
 
-			if ( $field->label == 'Name' ) {
+			if ( $field->label == 'Your Name' ) {
 
 				foreach ( $field->inputs as $input ) {
 
 					if ( $input['label'] == 'First' ) {
 
-						$first_name = ( isset( $entry[ $input['id'] ] ) && $entry[ $input['id'] ] ) ? $entry[ $input['id'] ] : false;
+						$your_first_name = ( isset( $entry[ $input['id'] ] ) && $entry[ $input['id'] ] ) ? $entry[ $input['id'] ] : false;
 
 					}
 
 					if ( $input['label'] == 'Last' ) {
 
-						$last_name = ( isset( $entry[ $input['id'] ] ) && $entry[ $input['id'] ] ) ? $entry[ $input['id'] ] : false;
+						$your_last_name = ( isset( $entry[ $input['id'] ] ) && $entry[ $input['id'] ] ) ? $entry[ $input['id'] ] : false;
+
+					}
+
+				}
+
+			}
+
+			if ( $field->label == 'Resident Name' ) {
+
+				foreach ( $field->inputs as $input ) {
+
+					if ( $input['label'] == 'First' ) {
+
+						$resident_first_name = ( isset( $entry[ $input['id'] ] ) && $entry[ $input['id'] ] ) ? $entry[ $input['id'] ] : false;
+
+					}
+
+					if ( $input['label'] == 'Last' ) {
+
+						$resident_last_name = ( isset( $entry[ $input['id'] ] ) && $entry[ $input['id'] ] ) ? $entry[ $input['id'] ] : false;
 
 					}
 
@@ -82,11 +125,25 @@ class Schedule_a_Visit_to_Sherpa_Send {
 
 		}
 
-		$result = SCHEDULEAVISITTOSHERPA()->api->create_lead( 250, 1, array(
-			'residentContactFirstName' => $first_name,
-			'residentContactLastName' => $last_name,
-			'primaryContactFirstName' => $first_name,
-			'primaryContactLastName' => $last_name,
+		$community_id = false;
+		$company_id = apply_filters( 'schedule_a_visit_to_sherpa_company_id', 224, $location_id );
+
+		foreach ( $sherpa_mapping as $row ) {
+
+			if ( $row['location_id'] == $location_id ) {
+				$community_id = $row['community_id'];
+				break;
+			}
+
+		}
+
+		if ( ! $community_id ) return false;
+
+		$result = SCHEDULEAVISITTOSHERPA()->api->create_lead( $company_id, $community_id, array(
+			'residentContactFirstName' => $resident_first_name,
+			'residentContactLastName' => $resident_last_name,
+			'primaryContactFirstName' => $your_first_name,
+			'primaryContactLastName' => $your_last_name,
 			'primaryContactEmail' => $email,
 		) );
         

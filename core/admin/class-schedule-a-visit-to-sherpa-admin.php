@@ -292,6 +292,13 @@ class Schedule_a_Visit_to_Sherpa_Admin {
 
 		$locations = wp_list_pluck( $locations_query->posts, 'post_title', 'ID' );
 
+		$sherpa_communities = apply_filters( 'schedule_a_visit_to_sherpa_communities', array(
+			2 => __( 'Lodges of Durand', 'schedule-a-visit-to-sherpa' ),
+			4 => __( 'New Friends Memory Care Kalamazoo', 'schedule-a-visit-to-sherpa' ),
+			1 => __( 'Vibrant Life Superior Township', 'schedule-a-visit-to-sherpa' ),
+			3 => __( 'Vibrant Life Temperance', 'schedule-a-visit-to-sherpa' ),
+		) );
+
 		$fields[] = array(
 			'name' => 'vibrant_life_sherpa_mapping',
 			'type' => 'repeater',
@@ -303,8 +310,8 @@ class Schedule_a_Visit_to_Sherpa_Admin {
 			'fields' => array(
 				'location_id' => array(
 					'type' => 'select',	
-					'label' => __( 'Location', 'schedule-a-visit-to-sherpa' ),
 					'args' => array(
+						'label' => '<strong>' . __( 'Location', 'schedule-a-visit-to-sherpa' ) . '</strong>',
 						'options' => $locations,
 						'option_none' => __( '-- Choose a Location --', 'schedule-a-visit-to-sherpa' ),
 						'input_class' => 'regular-text',
@@ -312,11 +319,13 @@ class Schedule_a_Visit_to_Sherpa_Admin {
 				),
 				'community_id' => array(
 					'type' => 'select',	
-					'label' => __( 'Sherpa Community', 'schedule-a-visit-to-sherpa' ),
 					'args' => array(
-						'options' => array(),
+						'label' => '<strong>' . __( 'Sherpa Community', 'schedule-a-visit-to-sherpa' ) . '</strong>',
+						'options' => $sherpa_communities,
 						'option_none' => __( '-- Choose a Community from Sherpa --', 'schedule-a-visit-to-sherpa' ),
 						'input_class' => 'regular-text',
+						'description' => '<p class="description">' . __( 'These values are hardcoded. We cannot add or remove Sherpa Communities without updating the plugin.', 'schedule-a-visit-to-sherpa' ) . '</p>',
+						'description_tip' => false,
 					),
 				),
 			),
