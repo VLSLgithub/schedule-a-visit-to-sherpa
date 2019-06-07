@@ -2,7 +2,7 @@
 /**
  * Abstract API Class that handles most of the logic
  *
- * @since {{VERSION}}
+ * @since 1.0.0
  *
  * @package Schedule_a_Visit_to_Sherpa
  * @subpackage Schedule_a_Visit_to_Sherpa/core/api
@@ -14,26 +14,26 @@ abstract class Schedule_a_Visit_to_Sherpa_Abstract_API {
 	
 	/**
 	 * @var			string $api_endpoint Holds set API Endpoint
-	 * @since		{{VERSION}}
+	 * @since		1.0.0
 	 */
 	public $api_endpoint = '';
 	
 	/**
 	 * @var			array $headers The Headers sent to the API
-	 * @since		{{VERSION}}
+	 * @since		1.0.0
 	 */
 	private $headers = array();
 	
 	/**
 	 * @var			array $default_args The default Args sent to the API
-	 * @since		{{VERSION}}
+	 * @since		1.0.0
 	 */
 	private $default_args = array();
 	
 	/**
 	 * Schedule_a_Visit_to_Sherpa_Abstract_API constructor.
 	 * 
-	 * @since		{{VERSION}}
+	 * @since		1.0.0
 	 */
 	function __construct() {
 		// Extended Classes have their own Constructors
@@ -47,7 +47,7 @@ abstract class Schedule_a_Visit_to_Sherpa_Abstract_API {
 	 * @param		int 	$timeout	Timeout limit for request in seconds
 	 *																
 	 * @access		public
-	 * @since		{{VERSION}}
+	 * @since		1.0.0
 	 * @return		array|false 		Assoc array of API response, decoded from JSON
 	 */
 	public function delete( $method, $args = array(), $timeout = 10 ) {
@@ -62,7 +62,7 @@ abstract class Schedule_a_Visit_to_Sherpa_Abstract_API {
 	 * @param		int 	$timeout	Timeout limit for request in seconds
 	 *																
 	 * @access		public
-	 * @since		{{VERSION}}
+	 * @since		1.0.0
 	 * @return		array|false 		Assoc array of API response, decoded from JSON
 	 */
 	public function get( $method, $args = array(), $timeout = 10 ) {
@@ -77,7 +77,7 @@ abstract class Schedule_a_Visit_to_Sherpa_Abstract_API {
 	 * @param		int 	$timeout	Timeout limit for request in seconds
 	 *																
 	 * @access		public
-	 * @since		{{VERSION}}
+	 * @since		1.0.0
 	 * @return		array|false			Assoc array of API response, decoded from JSON
 	 */
 	public function patch( $method, $args = array(), $timeout = 10 ) {
@@ -92,7 +92,7 @@ abstract class Schedule_a_Visit_to_Sherpa_Abstract_API {
 	 * @param		int 	$timeout	Timeout limit for request in seconds
 	 *																
 	 * @access		public
-	 * @since		{{VERSION}}
+	 * @since		1.0.0
 	 * @return		array|false			Assoc array of API response, decoded from JSON
 	 */
 	public function post( $method, $args = array(), $timeout = 10 ) {
@@ -107,7 +107,7 @@ abstract class Schedule_a_Visit_to_Sherpa_Abstract_API {
 	 * @param		int 	$timeout	Timeout limit for request in seconds
 	 *																
 	 * @access		public
-	 * @since		{{VERSION}}
+	 * @since		1.0.0
 	 * @return		array|false			Assoc array of API response, decoded from JSON
 	 */
 	public function put( $method, $args = array(), $timeout = 10 ) {
@@ -123,7 +123,7 @@ abstract class Schedule_a_Visit_to_Sherpa_Abstract_API {
 	 * @param		integer $timeout 	Timeout limit for request in seconds
 	 *																
 	 * @access		public
-	 * @since		{{VERSION}}
+	 * @since		1.0.0
 	 * @return		array|false 		Assoc array of API response, decoded from JSON
 	 */
 	private function make_request( $http_verb, $method, $args = array(), $timeout = 10 ) {
@@ -178,7 +178,7 @@ abstract class Schedule_a_Visit_to_Sherpa_Abstract_API {
 	 * Return the API Endpoint
 	 * 
 	 * @access		public
-	 * @since		{{VERSION}}
+	 * @since		1.0.0
 	 * @return		string API Endpoint
 	 */
 	public function get_api_endpoint() {
@@ -191,7 +191,7 @@ abstract class Schedule_a_Visit_to_Sherpa_Abstract_API {
 	 * @param		array $headers New Header Values
 	 *								   
 	 * @access		public
-	 * @since		{{VERSION}}
+	 * @since		1.0.0
 	 * @return		void
 	 */
 	public function set_headers( $headers ) {
@@ -206,7 +206,7 @@ abstract class Schedule_a_Visit_to_Sherpa_Abstract_API {
 	 * @param		array $default_args Default Args
 	 *								   
 	 * @access		public
-	 * @since		{{VERSION}}
+	 * @since		1.0.0
 	 * @return		void
 	 */
 	public function set_default_args( $default_args ) {

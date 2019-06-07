@@ -2,7 +2,7 @@
 /**
  * Sherpa API Class
  *
- * @since {{VERSION}}
+ * @since 1.0.0
  *
  * @package Schedule_a_Visit_to_Sherpa
  * @subpackage Schedule_a_Visit_to_Sherpa/core/api
@@ -20,14 +20,14 @@ if ( ! class_exists( 'Schedule_a_Visit_to_Sherpa_API' ) ) {
 
 		/**
 		 * @var			string $api_endpoint Holds set API Endpoint
-		 * @since		{{VERSION}}
+		 * @since		1.0.0
 		 */
 		public $api_endpoint = 'https://members.sherpacrm.com/v1';
 
 		/**
 		 * Schedule_a_Visit_to_Sherpa_API constructor.
 		 * 
-		 * @since		{{VERSION}}
+		 * @since		1.0.0
 		 */
 		function __construct( $api_key ) {
 
