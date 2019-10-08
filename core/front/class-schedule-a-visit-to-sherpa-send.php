@@ -103,7 +103,7 @@ class Schedule_a_Visit_to_Sherpa_Send {
 
 			}
 
-			if ( $field->label == 'Resident Name' ) {
+			if ( $field->label == 'Prospective Resident Name' ) {
 
 				foreach ( $field->inputs as $input ) {
 
