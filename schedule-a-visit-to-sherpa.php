@@ -3,7 +3,7 @@
  * Plugin Name: Schedule a Visit to Sherpa
  * Plugin URI: https://github.com/VLSLgithub/schedule-a-visit-to-sherpa
  * Description: Sends "Schedule a Visit" form data as leads to Sherpa
- * Version: 1.0.1
+ * Version: 1.0.2
  * Text Domain: schedule-a-visit-to-sherpa
  * Author: Eric Defore
  * Author URI: https://realbigmarketing.com/
