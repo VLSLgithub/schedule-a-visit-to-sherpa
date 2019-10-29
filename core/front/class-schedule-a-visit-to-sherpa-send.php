@@ -53,7 +53,7 @@ class Schedule_a_Visit_to_Sherpa_Send {
 
 		foreach ( $form['fields'] as $field ) {
 
-			if ( $field->label == 'Which Vibrant Life Community Are You Wanting to Visit?' ) {
+			if ( $field->label == 'Which Community?' ) {
 
 				$location_short_name = ( isset( $entry[ $field->id ] ) && $entry[ $field->id ] ) ? $entry[ $field->id ] : false;
 
@@ -77,7 +77,7 @@ class Schedule_a_Visit_to_Sherpa_Send {
 
 			}
 
-			if ( $field->label == 'Email' ) {
+			if ( $field->label == 'What is Your Email Address?' ) {
 
 				$email = ( isset( $entry[ $field->id ] ) && $entry[ $field->id ] ) ? $entry[ $field->id ] : false;
 
